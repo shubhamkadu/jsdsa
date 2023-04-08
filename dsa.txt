@@ -1,0 +1,420 @@
+## Frequency Counter Patterns for Solving Problem 
+
+   This pattern  uses objects or set to collect values/Frequency of values 
+   this can often avoid the need for nested loops or O(N^2) operations with arrays / strings
+
+
+
+question
+
+ write the function called same, which accepts the two arrays.
+ the function should return true if every value in the array has its corresponding value square in the second array. the frequency of values must be the same
+
+same([1,2,3],[4,1,9])// true  
+same([1,2,3],[1,9]) // false 
+same([1,2,1],[4,4,1])// false (must ne same frequency)
+
+
+const same (arr1,arr2=>{
+    if(arr1.length !== arr2.length){
+        return false
+    }
+     for(let i=0;arr1.length;arr1++){
+        let correctIndex = arr2.indexOf(arr1[i] ** 2)
+        if(correctIndex === -1){
+            return false
+        }  
+        arr2.splice(correctIndex,1)  // it remove the corrosponding element from array     
+     }
+     return true
+
+})
+
+same([1,2,3,2],[9,1,4,4])
+
+output=> true
+
+Time complexity -- N^2
+
+
+Refactored Solution 
+
+function same(arr1,arr2){
+    if(arr1.length !== arr2.length){
+        return false
+    }
+
+    let frequencyCounter1 ={}
+    let frequencyCounter2 ={}
+    for(let val of arr1){
+        frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1  //{1:1,2:2,3:1}
+    }
+
+    for(let val of arr2){
+        frequencyCounter2[val] = (frequencyCounter2[val] || 0)+1   //{9:1,1:1,4:4}
+    }
+
+    for(let key in frequencyCounter1){
+
+        if((!key ** 2 in frequencyCounter2)){
+            return false
+        }
+
+        if(frquencyCounter2[key ** 2] !== frequencyCounter1[key]){
+            return false
+        }
+    }
+ return true
+
+}
+
+same([1,2,3,2],[9,1,4,4])
+
+output == true
+
+Time Complexity -- O(n)
+
+
+Anagram example
+
+
+function valideanagram(first,send){
+    if(first.length !== second.length){
+        return false
+    }
+
+    const lookup = {}
+
+    for(let i=0; i<first.length;i++){
+        let letter = first[i]
+        lookup[letter] ? lookup[letter] +=1 :lookup[letter] = 1
+    }
+
+    for(let i=0; i< second.length; i++){
+        let Secletter = second[i]
+
+        if(!lookup[Secletter]){
+           return false
+        } else{
+             lookup[Secletter] -=1
+        }
+    }
+    return true
+}
+
+
+
+
+
+### Multiple Pointers Patterns
+
+creating pointers or values that correspond to an index or posion and move
+towards the beginning, end or middle based on a certain condition
+
+ very efficient for solving problems with minimal space complexity as well
+
+
+example: Write a function called sumzero which accepts  sorted array of integers. The function should find
+ the first pair where the sum is 0. return an array that includes both value that sum to zero
+ or undefined if pair does not exist
+
+ sumZero([-3,-2,-1,0,1,2,3]) // [-3,3]
+  sumZero([-2,0,1,3]) // undefined
+
+
+function sumZero(arr){
+    for(let i=0; i<arr.length; i++){
+        for(let j=o; j<arr.length; j++){
+            if(arr[i] + arr[j] === 0){
+                return [arr[i],arr[j]]
+            }
+        }
+    }
+}
+sumZero([-3,-2,-1,0,4,3,5])
+
+output = [-3,3]
+
+Time complexity - o(N^2)
+space complexity - o(1)
+
+
+Refactored Solution
+
+sumZero(arr){
+    let left = 0
+    let right = arr.length -1
+
+    while(left<right){
+        let sum = arr[left] + arr[right]
+        if(sum === 0){
+            return [arr[left], arr[right]]
+        } else if(sum < 0){
+            right -- 
+
+        } else{
+            left ++
+        }
+    }
+}
+
+Time Complexity -o(N)
+Space Complexity -o(1)
+
+
+example=> CountUniqueValues 
+
+Implement a function called countUniqueValues,
+wich accepts a sorted array, and counts the unique value in the array as
+there can be negative number in the array, but it will always be sorted
+
+countUniqueValues([1,1,1,1,2]) // 2
+countUniqueValues([1,2,3,4,4,4,7,7,12,12,13]) // 7
+countUniqueValues([]) // 0
+countUniqueValues([-2,-1,-1,0,1,]) // 4
+
+function countUniqueValues(arr){
+    if(arr.length ===0) return 0;
+    var i=0
+    for(let j=0;j<arr.length;j++){
+        if(arr[i] !== arr[j]){
+            i++;
+            arr[i]=arr[j];
+        }
+    }
+    return i + 1;
+}
+
+countUniqueValues([1,2,3,4,4,])
+
+output = 4
+
+Time Complexity - O(n)
+Space Complexity - O(n)
+
+
+##### SLIDING WINDOW  PATTERN
+
+this pattersn involves creating a window which can either be an array or number from one position another
+depending on certain condition, the window either increases or closer(and a new window is created)
+vary useful for keep track of a subset of data in an array/sting etc.
+
+example
+write a function called maxSubBarraySum which accepts an array of integers and and a number called n.
+the function should calculate the maximum sum of n consecutive elements in the array
+
+maxSubarraySum([1,2,5,2,8,1,5],2)//10
+maxSubarraySum([1,2,5,2,8,1,5],4)//17
+maxSubarraySum([4,2,1,6],1)//6
+maxSubarraySum([4,2,1,6,2],4)//13
+maxSubarraySum([]41)//null
+
+
+### Divide And Conquer Pattern
+
+this pattern involves dividing data set into smaller chunks and
+then repeating a process with a subset of data
+this pattern can tremendously decrease time complexity
+
+example=>
+given a soterd array of intergers write a function called search, that accepts a value and returns the index
+ where the value passed to the fucntion is located.
+ if value is not found return -1
+
+search([1,2,3,4,5,6],4) //3
+search([1,2,3,4,5,6],6) //5
+search([1,2,3,4,5,6],11) //-1
+
+
+function search(arr,val){
+    for(let i=0;i<arr.length;i++){
+        if(arr[i] == val){
+            return i
+        }
+    }
+    return -1
+}
+
+
+Refactored Solution 
+
+function search(array,val){
+    let min=0
+    let max=array.length-1
+    while(min <=max){
+        let middle = Math.floor((min+max)/2)
+        let currentElement = array[middle];
+        if(array[middle] <val){
+            min = middle + 1;
+
+        } else if(array[middle]>val){
+            max = middle -1;
+        } else{
+            return middle
+        }
+    }
+    return -1;
+}
+
+
+
+
+
+
+##### Recursion Methods
+
+A process that calls itself is called recursion
+
+1. the cal stack
+
+ In almost all programming languages, there is a built in data structure that manages 
+ what happen when function invoked
+
+> call stack maintains function call order
+> any time a function is invoked it is placed (pushed)
+on the top of the call stack 
+> when javascript sees the return keyword or when the function ends the compiler will remove(pop)
+> when we keep pushing new function onto the call stack that why we need the recursion 
+
+>> how recursive function work 
+invoke the same function with different input until you reach your base case
+
+Base case is the condition when the recursion ends
+
+# Base case 
+# Different Input
+
+function CountDown(num){
+    if(num<=0){
+        console.log("All Done")
+        return
+    }
+    console.log(num)
+    num--
+    CountDown(num)
+}
+
+example>>
+
+function sumRange(num){
+    if(num===1) return 1
+    return num + sumRange(num-1)
+}
+
+sumRange(3)
+
+output=6
+
+first stage  return num + sumRange(num-1)
+                     3  + sumRange(2)
+                             return num + sumRange(num-1)
+                                     2  +   sumRange(1)
+                                                 return 1
+
+
+
+writing a factorial iteratively example
+
+non-recursive solution
+
+function factorial(num){
+    total = num 
+    for(let i = num; i>1;i--){
+        total *= i
+    }
+    return total
+}
+
+factorial(3)
+
+output=27
+
+
+recursive solution
+
+function factorial(num){
+    if(num===1) return 1
+    return num*factorial(num-1)
+}
+
+factorial(5)
+
+
+
+
+>>> comman recursive pitfalls
+
+no base case
+forgetting to return or returnning wrong thing
+stack overflow
+
+
+
+
+
+>>>> Helper method recursion
+
+finding a odd number
+
+function collectionValues(arr){
+      let result = []
+      function helper(helperInput){
+        if(helperInput.length === 0){
+            return 
+        }
+        if(helperInput[0] % 2 !==0){
+            result.push(helperInput[0])
+        }
+        helper(helperInput.slice(1))
+      }
+      helper(arr)
+      return result
+}
+
+collectionValues([1,2,3,4,5,6])
+output =
+
+
+>>>> pure Recursion
+
+function collectionOddValues(arr){
+    let newArr=[];
+    if(arr.length===0){
+        return newArr
+    }
+    if(arr[0] % 2 !==0){
+        newArr.push(arr[0])
+    }
+
+    newArr = newArr.concat(collectionOddValues(arr.slice(1)));
+    return newArr
+}
+
+collectionOddValues([1,2,3,4,5])
+
+output = [1,3,5]
+
+execusion  of line 389
+
+            newArr
+             [1].concat(collectionOddValues([2,3,4,5]))
+                                [].concat(collectionOddValues([3,4,5]))
+                                                   [3].concat(collectionOddValues([4,5]))
+                                                                     [].concat(collectionOddValues([5]))
+                                                                                         [5].concat(collectionOddValues([]))
+                                                                                                            []
+
+newArr = [1,3,5]
+
+
+Pure Recursion Tips
+
+1 for array use method like slice, the spread operator, and concat that makes copies of arrays so you do not mutate them
+2 remember that strings are immutable so you will need to use method like slice,substr,or substring to make copies of strings
+3 to make copies of objects use object.assign or the spread operator
+
+
+
+
+
+
