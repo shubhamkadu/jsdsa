@@ -29,7 +29,7 @@ function productOfArray(arr) {
     }
     return arr[0] * productOfArray(arr.slice(1));
 }
-ß
+
 
 // Write a function called recursiveRange which accepts a number and adds up all the
 // numbers from 0 to the number passed to the function
@@ -49,3 +49,84 @@ function fib(n){
     if (n <= 2) return 1;
     return fib(n-1) + fib(n-2);
 }
+
+
+
+// Write a recursive function called reverse which accepts a string and returns
+//  a new string in reverse.
+
+function reverse(str){
+  if(str.length<=1) return str
+  return reverse(str.slice(1)) + str[0]
+}
+
+
+// Write a recursive function called isPalindrome which returns true
+// if the string passed to it is a palindrome (reads the same forward and backward).
+// Otherwise it returns false.
+
+function isPalidrome(str){
+    if(str.length === 1) return true
+    if(str.length ===2) return str[0] === str[1]
+    if(str[0] === str.slice(-1)) return isPalidrome(str.slice(1,-1))
+    return false
+}
+
+// Write a recursive function called someRecursive which accepts an array and a callback.
+// The function returns true if a single value in the array returns true when passed to the callback.
+// Otherwise it returns false
+
+function someRecursive(arr,oddNum){
+    if(arr.length ===0) return false
+    if(oddNum(arr[0])) return true
+    function oddNum(arr){
+        return arr[0]%2
+    }
+    console.log(arr[0])
+    return someRecursive(arr.slice(1),oddNum)
+}
+
+// Write a recursive function called flatten which accepts an array of arrays
+// and returns a new array with all values flattened
+
+// test cases 
+
+// flatten([1, 2, 3, [4, 5] ]) // [1, 2, 3, 4, 5]
+// flatten([1, [2, [3, 4], [[5]]]]) // [1, 2, 3, 4, 5]
+// flatten([[1],[2],[3]]) // [1,2,3]
+// flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]) // [1,2,3
+
+function flatten(oldArr){
+    var newArr = []
+        for(var i = 0; i < oldArr.length; i++){
+          if(Array.isArray(oldArr[i])){
+                newArr = newArr.concat(flatten(oldArr[i]))
+          } else {
+                newArr.push(oldArr[i])
+          }
+    } 
+    return newArr;
+  }
+
+
+
+// Write a recursive function called capitalizeFirst. Given an array of strings,
+// capitalize the first letter of each string in the array. 
+
+function capitalizeWords (array) {
+    if (array.length === 1) {
+      return [array[0].toUpperCase()];
+    }
+    let res = capitalizeWords(array.slice(0, -1));
+    res.push(array.slice(array.length-1)[0].toUpperCase());
+    return res;
+   
+  }
+  
+
+// Write a recursive function called nestedEvenSum. Return the sum of all even numbers 
+// in an object which may contain nested objects 
+
+
+
+
