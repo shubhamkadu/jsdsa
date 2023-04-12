@@ -263,6 +263,9 @@ function search(array,val){
 
 ##### Recursion Methods
 
+https://www.freecodecamp.org/news/what-is-recursion-in-javascript/
+
+
 A process that calls itself is called recursion
 
 1. the cal stack
