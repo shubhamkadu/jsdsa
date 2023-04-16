@@ -422,6 +422,42 @@ Basic recursion practice examples
 
 
 
+##### Searching Algorithms
+
+
+>> Linear Search 
+
+given an array,the simplest way to search for
+an value is to look at every element in the array and check if its the value we want
+
+
+ javascript has Search 
+
+ . there are many different search methods on arrays in js
+
+ .indexOf
+ .includes
+ .find
+ .findIndex
+
+
+ but how do these function work ?
+
+
+function search(arr,val){
+    for(let i =0;arr.length -1;i++){
+        if(aa[i]==val) return true
+    return -1
+    }
+}
+
+Linear Search BIG O
+o(1)  O(n)     O(n)
+Best  average  worst
+
+Binary Search
+
+Binary search is a much faster from of search 
 
 
 
