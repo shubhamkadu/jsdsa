@@ -458,6 +458,182 @@ Best  average  worst
 Binary Search
 
 Binary search is a much faster from of search 
+rather than eliminating one element at a time,
+you can eliminate half of the remaining 
+element at a time
+
+Binary search only works on soterd arrays
+
+Binary search Pseudocode
+
+. this function accepts a sorted array and value
+. create a left pointer at the start of sthe array,
+and a right pointer at the end of the array 
+.while the left pointer comes before the right pointer:
+ .create a pointer in the middle 
+ .if you find the value you want,return the index 
+ .if the value is too large,move the right pointer down 
+.if you never find the value, return-1
+
+examples here=> Binary_Search.js
+
+Binary Search BIG O
+
+O(logn)                  o(1)
+Worst and average case   Best case 
+
+when we double the input but operation we have to perform is increase by one or similar then thats relationship is log base 2 of n
+log base 2 is simplified to logn
+
+
+Naive String Search
+
+.suppose you want to count the number of times a smaller string appears in a longer string
+
+example here => Naive_string_search.js 
+
+
+### sorting Algorithms
+Sorting is the process of rearranging the items in collection
+so that items in a some kind of order 
+
+https://www.toptal.com/developers/sorting-algorithms
+
+
+
+Built In Shorting in js
+
+built in shorting in js converting them to strings and comparing strings in UTF-16 code units order.
+For example, "banana" comes before "cherry". In a numeric sort, 9 comes before 80, but because numbers are converted to strings, "80" comes before "9" in the Unicode order
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+
+function numberCompare(num1,num2){
+    return num1 -num2
+}
+
+[6,4,15,10].sort(numberCompare) //[4,6,10,15]
+
+funcrion CompareByLen(str1,str2){
+    return str1.length - str2.length
+}
+
+["steele","colt","data structure","algorithms"].sort(CompareByLen) // ["colt","steele","algorithms","data structure"]
+
+
+### Bubble sort    "bubble sort is not very useful"
+
+A sorting algorithms the largest value bubble up to the top
+
+https://www.geeksforgeeks.org/bubble-sort-algorithms-by-using-javascript/
+
+
+before we sort we must swap 
+
+.many sorting algorithms involves some types of swapping functionality 
+
+ES5
+
+function swap(arr,idx1,idx2){
+    var temp = arr[idx1]
+    arr[idx1] = arr[idx2]
+    arr[idx2] = temp 
+
+}
+
+
+ES2015 
+const swap = (arr,idx1,idx2)=>{
+    [arr[idx1],arr[isx2]] = [arr[idx2],arr[idx1]]
+}
+
+
+
+Bubblesort Pseudocode
+
+function Bsort(arr){
+    for(let i=0;i<arr.length;i++){
+        for(let j=0;j<arr.length;j++){
+            console.log(arr,arr[j],arr[j+1])
+            if(arr[j]>arr[j+1]){
+                let temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
+            }
+        }
+    }
+    return arr 
+}
+
+this example perform one extra step 
+
+Bsort([,4,56,7,4,32,6])
+
+following example is optimize 
+
+function Bsort(arr){
+    for(let i=arr.length; i >0;i--){
+        for(let j=0; j<i-1;j++){
+            if(arr[j] > arr[j+1]) {
+                 let temp = arr[j]
+                 arr[j] = arr[j+1]
+                 arr[j+1] = temp
+            }
+        }
+    }
+    return arr 
+}
+
+another version of example
+
+function Bsort(arr){
+    const swap = (arr,idx1,idx2){
+        [arr[idx1],arr[idx2]] = [arr[idx2,arr[idx1]]]
+    }
+
+    for(let i= arr.length;i > 0;i--){
+    for(let j=0;j<i-1;j++){
+        if(arr[j] > arr[j+1]){
+            swap(arr,j,j+1)
+        }
+      }
+     }
+     return arr
+}
+
+
+### Bubble sort optimization
+
+in the preveous example even there is no swap program still executing and that is unnecessary
+so we optimize the solution
+
+
+
+function Bsort(arr){
+    var = noSwap
+    for(let i=arr.length; i >0;i--){
+        noSwap = true
+        for(let j=0; j<i-1;j++){
+            if(arr[j] > arr[j+1]) {
+                 let temp = arr[j]
+                 arr[j] = arr[j+1]
+                 arr[j+1] = temp
+                 noSwap = false
+            }
+
+        }
+        if(noSwap) break;
+    }
+    return arr 
+}
+
+
+
+
+
+
+
+
 
 
 
