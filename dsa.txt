@@ -627,6 +627,30 @@ function Bsort(arr){
     return arr 
 }
 
+Bubble sort GIG O Complexity is O(n^2) if data is sorted then O(n)
+
+
+
+##### Selection Sort 
+
+https://www.geeksforgeeks.org/selection-sort/
+
+find the smallest element in arry place it at first 
+and then again find the smallest element and swap it to second and so on
+
+examples => Selection_sort.js
+
+
+### Insertion sort
+
+Builds up the sort by gradually creating a larger left half which is always sorted
+
+
+Insertion sort is a simple sorting algorithms that works similar
+
+
+
+
 
 
 
