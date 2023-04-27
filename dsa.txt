@@ -643,10 +643,10 @@ examples => Selection_sort.js
 
 ### Insertion sort
 
+https://www.geeksforgeeks.org/insertion-sort/
+
 Builds up the sort by gradually creating a larger left half which is always sorted
 
-
-Insertion sort is a simple sorting algorithms that works similar
 
 
 

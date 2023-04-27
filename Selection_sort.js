@@ -36,5 +36,8 @@ function selectionSort(arr){
     
 }
 
+// time complexity O(n^2)
+// Auxiliary Space: O(1)
+
 
 
